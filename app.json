@@ -1,46 +1,47 @@
 {
-	"expo": {
-		"name": "FoodNerdy",
-		"slug": "FoodNerdy",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "src/assets/images/brand/adaptive-icon.png",
-		"scheme": "foodnerdy",
-		"userInterfaceStyle": "automatic",
-		"newArchEnabled": true,
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"package": "com.foodnerdy.app",
-			"edgeToEdgeEnabled": true,
-			"adaptiveIcon": {
-				"foregroundImage": "src/assets/images/brand/adaptive-icon.png",
-				"backgroundColor": "#ecfccb" // lime-100
-			}
-		},
-		"web": {
-			"bundler": "metro",
-			"output": "static",
-			"favicon": "src/assets/images/brand/brand-logo.png"
-		},
-		"plugins": [
-			"expo-router",
-			[
-				"expo-splash-screen",
-				{
-					"backgroundColor": "#ecfccb", // lime-100
-					"image": "src/assets/images/brand/splash-icon-light.png",
-					"dark": {
-						"image": "src/assets/images/brand/splash-icon-dark.png",
-						"backgroundColor": "#1a2e05" // lime-950
-					},
-					"imageWidth": 200
-				}
-			]
-		],
-		"experiments": {
-			"typedRoutes": true
-		}
-	}
+  "expo": {
+    "name": "FoodNerdy",
+    "slug": "FoodNerdy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "src/assets/images/brand/adaptive-icon.png",
+    "scheme": "foodnerdy",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.foodnerdy.app",
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "src/assets/images/brand/adaptive-icon.png",
+        "backgroundColor": "#ecfccb"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "src/assets/images/brand/brand-logo.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ecfccb",
+          "image": "src/assets/images/brand/splash-icon-light.png",
+          "dark": {
+            "image": "src/assets/images/brand/splash-icon-dark.png",
+            "backgroundColor": "#1a2e05"
+          },
+          "imageWidth": 200
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
 }
