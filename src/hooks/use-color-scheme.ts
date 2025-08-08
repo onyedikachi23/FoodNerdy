@@ -12,7 +12,7 @@ import { useColorScheme as useNWColorScheme } from "nativewind";
 const useSystemColorScheme = () => {
 	const colorScheme = useRNColorScheme();
 
-	return (colorScheme ?? "dark") satisfies ColorSchemeName;
+	return (colorScheme ?? "light") satisfies ColorSchemeName;
 };
 
 /**
@@ -24,7 +24,7 @@ const useAppColorScheme = () => {
 	const colorSchemeControl = useNWColorScheme();
 	return {
 		...colorSchemeControl,
-		colorScheme: colorSchemeControl.colorScheme ?? "dark",
+		colorScheme: colorSchemeControl.colorScheme ?? "light",
 	} satisfies typeof colorSchemeControl;
 };
 
