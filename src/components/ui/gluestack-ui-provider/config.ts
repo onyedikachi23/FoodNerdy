@@ -1,309 +1,326 @@
-'use client';
-import { vars } from 'nativewind';
+/** @format */
 
-export const config = {
-  light: vars({
-    '--color-primary-0': '179 179 179',
-    '--color-primary-50': '153 153 153',
-    '--color-primary-100': '128 128 128',
-    '--color-primary-200': '115 115 115',
-    '--color-primary-300': '102 102 102',
-    '--color-primary-400': '82 82 82',
-    '--color-primary-500': '51 51 51',
-    '--color-primary-600': '41 41 41',
-    '--color-primary-700': '31 31 31',
-    '--color-primary-800': '13 13 13',
-    '--color-primary-900': '10 10 10',
-    '--color-primary-950': '8 8 8',
+import { vars } from "nativewind";
 
-    /* Secondary  */
-    '--color-secondary-0': '253 253 253',
-    '--color-secondary-50': '251 251 251',
-    '--color-secondary-100': '246 246 246',
-    '--color-secondary-200': '242 242 242',
-    '--color-secondary-300': '237 237 237',
-    '--color-secondary-400': '230 230 231',
-    '--color-secondary-500': '217 217 219',
-    '--color-secondary-600': '198 199 199',
-    '--color-secondary-700': '189 189 189',
-    '--color-secondary-800': '177 177 177',
-    '--color-secondary-900': '165 164 164',
-    '--color-secondary-950': '157 157 157',
+type ColorKey = `--color-${string}-${string}`;
+type ColorValue = `${number} ${number} ${number}`;
+type ColorMap = Record<ColorKey, ColorValue>;
 
-    /* Tertiary */
-    '--color-tertiary-0': '255 250 245',
-    '--color-tertiary-50': '255 242 229',
-    '--color-tertiary-100': '255 233 213',
-    '--color-tertiary-200': '254 209 170',
-    '--color-tertiary-300': '253 180 116',
-    '--color-tertiary-400': '251 157 75',
-    '--color-tertiary-500': '231 129 40',
-    '--color-tertiary-600': '215 117 31',
-    '--color-tertiary-700': '180 98 26',
-    '--color-tertiary-800': '130 73 23',
-    '--color-tertiary-900': '108 61 19',
-    '--color-tertiary-950': '84 49 18',
+const lightThemeMap = {
+	/* Primary - Tailwind lime */
+	"--color-primary-0": "250 250 250", // neutral-50 #fafafa
+	"--color-primary-50": "247 254 231", // lime-50 #f7fee7
+	"--color-primary-100": "236 252 198", // lime-100 #ecfcc6
+	"--color-primary-200": "217 249 157", // lime-200 #d9f99d
+	"--color-primary-300": "190 242 100", // lime-300 #bef264
+	"--color-primary-400": "163 230 53", // lime-400 #a3e635
+	"--color-primary-500": "132 204 22", // lime-500 #84cc16
+	"--color-primary-600": "101 163 13", // lime-600 #65a30d
+	"--color-primary-700": "77 124 15", // lime-700 #4d7c0f
+	"--color-primary-800": "63 98 18", // lime-800 #3f6212
+	"--color-primary-900": "54 83 20", // lime-900 #365314
+	"--color-primary-950": "26 46 5", // lime-950 #1a2e05
 
-    /* Error */
-    '--color-error-0': '254 233 233',
-    '--color-error-50': '254 226 226',
-    '--color-error-100': '254 202 202',
-    '--color-error-200': '252 165 165',
-    '--color-error-300': '248 113 113',
-    '--color-error-400': '239 68 68',
-    '--color-error-500': '230 53 53',
-    '--color-error-600': '220 38 38',
-    '--color-error-700': '185 28 28',
-    '--color-error-800': '153 27 27',
-    '--color-error-900': '127 29 29',
-    '--color-error-950': '83 19 19',
+	/* Secondary - Tailwind lime */
+	"--color-secondary-0": "250 250 250", // neutral-50 #fafafa
+	"--color-secondary-50": "247 254 231", // lime-50 #f7fee7
+	"--color-secondary-100": "236 252 198", // lime-100 #ecfcc6
+	"--color-secondary-200": "217 249 157", // lime-200 #d9f99d
+	"--color-secondary-300": "190 242 100", // lime-300 #bef264
+	"--color-secondary-400": "163 230 53", // lime-400 #a3e635
+	"--color-secondary-500": "132 204 22", // lime-500 #84cc16
+	"--color-secondary-600": "101 163 13", // lime-600 #65a30d
+	"--color-secondary-700": "77 124 15", // lime-700 #4d7c0f
+	"--color-secondary-800": "63 98 18", // lime-800 #3f6212
+	"--color-secondary-900": "54 83 20", // lime-900 #365314
+	"--color-secondary-950": "26 46 5", // lime-950 #1a2e05
 
-    /* Success */
-    '--color-success-0': '228 255 244',
-    '--color-success-50': '202 255 232',
-    '--color-success-100': '162 241 192',
-    '--color-success-200': '132 211 162',
-    '--color-success-300': '102 181 132',
-    '--color-success-400': '72 151 102',
-    '--color-success-500': '52 131 82',
-    '--color-success-600': '42 121 72',
-    '--color-success-700': '32 111 62',
-    '--color-success-800': '22 101 52',
-    '--color-success-900': '20 83 45',
-    '--color-success-950': '27 50 36',
+	/* Tertiary - Tailwind lime */
+	"--color-tertiary-0": "250 250 250", // neutral-50 #fafafa
+	"--color-tertiary-50": "247 254 231", // lime-50 #f7fee7
+	"--color-tertiary-100": "236 252 198", // lime-100 #ecfcc6
+	"--color-tertiary-200": "217 249 157", // lime-200 #d9f99d
+	"--color-tertiary-300": "190 242 100", // lime-300 #bef264
+	"--color-tertiary-400": "163 230 53", // lime-400 #a3e635
+	"--color-tertiary-500": "132 204 22", // lime-500 #84cc16
+	"--color-tertiary-600": "101 163 13", // lime-600 #65a30d
+	"--color-tertiary-700": "77 124 15", // lime-700 #4d7c0f
+	"--color-tertiary-800": "63 98 18", // lime-800 #3f6212
+	"--color-tertiary-900": "54 83 20", // lime-900 #365314
+	"--color-tertiary-950": "26 46 5", // lime-950 #1a2e05
 
-    /* Warning */
-    '--color-warning-0': '255 249 245',
-    '--color-warning-50': '255 244 236',
-    '--color-warning-100': '255 231 213',
-    '--color-warning-200': '254 205 170',
-    '--color-warning-300': '253 173 116',
-    '--color-warning-400': '251 149 75',
-    '--color-warning-500': '231 120 40',
-    '--color-warning-600': '215 108 31',
-    '--color-warning-700': '180 90 26',
-    '--color-warning-800': '130 68 23',
-    '--color-warning-900': '108 56 19',
-    '--color-warning-950': '84 45 18',
+	/* Error - Tailwind red */
+	"--color-error-0": "254 242 242", // red-50 #fef2f2
+	"--color-error-50": "254 226 226", // red-100 #fee2e2
+	"--color-error-100": "254 205 205", // red-200 #fecaca
+	"--color-error-200": "252 165 165", // red-300 #fca5a5
+	"--color-error-300": "248 113 113", // red-400 #f87171
+	"--color-error-400": "239 68 68", // red-500 #ef4444
+	"--color-error-500": "220 38 38", // red-600 #dc2626
+	"--color-error-600": "185 28 28", // red-700 #b91c1c
+	"--color-error-700": "153 27 27", // red-800 #991b1b
+	"--color-error-800": "127 29 29", // red-900 #7f1d1d
+	"--color-error-900": "69 10 10", // red-950 #450a0a
+	"--color-error-950": "21 3 3", // custom-darkest-red #150303
 
-    /* Info */
-    '--color-info-0': '236 248 254',
-    '--color-info-50': '199 235 252',
-    '--color-info-100': '162 221 250',
-    '--color-info-200': '124 207 248',
-    '--color-info-300': '87 194 246',
-    '--color-info-400': '50 180 244',
-    '--color-info-500': '13 166 242',
-    '--color-info-600': '11 141 205',
-    '--color-info-700': '9 115 168',
-    '--color-info-800': '7 90 131',
-    '--color-info-900': '5 64 93',
-    '--color-info-950': '3 38 56',
+	/* Success - Tailwind green */
+	"--color-success-0": "240 253 244", // green-50 #f0fdf4
+	"--color-success-50": "220 252 231", // green-100 #dcfce7
+	"--color-success-100": "187 247 208", // green-200 #bbf7d0
+	"--color-success-200": "134 239 172", // green-300 #86efad
+	"--color-success-300": "74 222 128", // green-400 #4ade80
+	"--color-success-400": "34 197 94", // green-500 #22c55e
+	"--color-success-500": "22 163 74", // green-600 #16a34a
+	"--color-success-600": "21 128 61", // green-700 #15803d
+	"--color-success-700": "22 101 52", // green-800 #166534
+	"--color-success-800": "20 83 45", // green-900 #14532d
+	"--color-success-900": "12 45 28", // green-950 #0c2d1c
+	"--color-success-950": "5 22 12", // custom-darkest-green #05160c
 
-    /* Typography */
-    '--color-typography-0': '254 254 255',
-    '--color-typography-50': '245 245 245',
-    '--color-typography-100': '229 229 229',
-    '--color-typography-200': '219 219 220',
-    '--color-typography-300': '212 212 212',
-    '--color-typography-400': '163 163 163',
-    '--color-typography-500': '140 140 140',
-    '--color-typography-600': '115 115 115',
-    '--color-typography-700': '82 82 82',
-    '--color-typography-800': '64 64 64',
-    '--color-typography-900': '38 38 39',
-    '--color-typography-950': '23 23 23',
+	/* Warning - Tailwind amber */
+	"--color-warning-0": "255 251 235", // amber-50 #fffbeb
+	"--color-warning-50": "254 243 199", // amber-100 #fef3c7
+	"--color-warning-100": "253 230 138", // amber-200 #fde68a
+	"--color-warning-200": "252 211 77", // amber-300 #fcd34d
+	"--color-warning-300": "251 191 36", // amber-400 #fbbf24
+	"--color-warning-400": "245 158 11", // amber-500 #f59e0b
+	"--color-warning-500": "217 119 6", // amber-600 #d97706
+	"--color-warning-600": "180 83 9", // amber-700 #b45309
+	"--color-warning-700": "146 64 14", // amber-800 #92400e
+	"--color-warning-800": "120 53 15", // amber-900 #78350f
+	"--color-warning-900": "77 34 5", // amber-950 #4d2006
+	"--color-warning-950": "49 21 3", // custom-darkest-amber #311503
 
-    /* Outline */
-    '--color-outline-0': '253 254 254',
-    '--color-outline-50': '243 243 243',
-    '--color-outline-100': '230 230 230',
-    '--color-outline-200': '221 220 219',
-    '--color-outline-300': '211 211 211',
-    '--color-outline-400': '165 163 163',
-    '--color-outline-500': '140 141 141',
-    '--color-outline-600': '115 116 116',
-    '--color-outline-700': '83 82 82',
-    '--color-outline-800': '65 65 65',
-    '--color-outline-900': '39 38 36',
-    '--color-outline-950': '26 23 23',
+	/* Info - Tailwind cyan */
+	"--color-info-0": "240 253 255", // cyan-50 #f0fdff
+	"--color-info-50": "207 250 254", // cyan-100 #cffafe
+	"--color-info-100": "165 243 252", // cyan-200 #a5f3fc
+	"--color-info-200": "103 232 249", // cyan-300 #67e8f9
+	"--color-info-300": "34 211 238", // cyan-400 #22d3ee
+	"--color-info-400": "6 182 212", // cyan-500 #06b6d4
+	"--color-info-500": "14 116 144", // cyan-600 #0e7490
+	"--color-info-600": "21 94 117", // cyan-700 #155e75
+	"--color-info-700": "25 81 98", // cyan-800 #194a5e
+	"--color-info-800": "24 58 71", // cyan-900 #183a4a
+	"--color-info-900": "8 47 70", // cyan-950 #082f49
+	"--color-info-950": "7 28 35", // custom-darkest-cyan #071c23
 
-    /* Background */
-    '--color-background-0': '255 255 255',
-    '--color-background-50': '246 246 246',
-    '--color-background-100': '242 241 241',
-    '--color-background-200': '220 219 219',
-    '--color-background-300': '213 212 212',
-    '--color-background-400': '162 163 163',
-    '--color-background-500': '142 142 142',
-    '--color-background-600': '116 116 116',
-    '--color-background-700': '83 82 82',
-    '--color-background-800': '65 64 64',
-    '--color-background-900': '39 38 37',
-    '--color-background-950': '18 18 18',
+	/* Typography - Tailwind neutral */
+	"--color-typography-0": "250 250 250", // neutral-50 #fafafa
+	"--color-typography-50": "245 245 245", // neutral-100 #f5f5f5
+	"--color-typography-100": "229 229 229", // neutral-200 #e5e5e5
+	"--color-typography-200": "212 212 212", // neutral-300 #d4d4d4
+	"--color-typography-300": "163 163 163", // neutral-400 #a3a3a3
+	"--color-typography-400": "115 115 115", // neutral-500 #737373
+	"--color-typography-500": "82 82 82", // neutral-600 #525252
+	"--color-typography-600": "64 64 64", // neutral-700 #404040
+	"--color-typography-700": "38 38 38", // neutral-800 #262626
+	"--color-typography-800": "23 23 23", // neutral-900 #171717
+	"--color-typography-900": "10 10 10", // neutral-950 #0a0a0a
+	"--color-typography-950": "10 10 10", // neutral-950 #0a0a0a
 
-    /* Background Special */
-    '--color-background-error': '254 241 241',
-    '--color-background-warning': '255 243 234',
-    '--color-background-success': '237 252 242',
-    '--color-background-muted': '247 248 247',
-    '--color-background-info': '235 248 254',
+	/* Outline - Tailwind neutral */
+	"--color-outline-0": "250 250 250", // neutral-50 #fafafa
+	"--color-outline-50": "245 245 245", // neutral-100 #f5f5f5
+	"--color-outline-100": "229 229 229", // neutral-200 #e5e5e5
+	"--color-outline-200": "212 212 212", // neutral-300 #d4d4d4
+	"--color-outline-300": "163 163 163", // neutral-400 #a3a3a3
+	"--color-outline-400": "115 115 115", // neutral-500 #737373
+	"--color-outline-500": "82 82 82", // neutral-600 #525252
+	"--color-outline-600": "64 64 64", // neutral-700 #404040
+	"--color-outline-700": "38 38 38", // neutral-800 #262626
+	"--color-outline-800": "23 23 23", // neutral-900 #171717
+	"--color-outline-900": "10 10 10", // neutral-950 #0a0a0a
+	"--color-outline-950": "10 10 10", // neutral-950 #0a0a0a
 
-    /* Focus Ring Indicator  */
-    '--color-indicator-primary': '55 55 55',
-    '--color-indicator-info': '83 153 236',
-    '--color-indicator-error': '185 28 28',
-  }),
-  dark: vars({
-    '--color-primary-0': '166 166 166',
-    '--color-primary-50': '175 175 175',
-    '--color-primary-100': '186 186 186',
-    '--color-primary-200': '197 197 197',
-    '--color-primary-300': '212 212 212',
-    '--color-primary-400': '221 221 221',
-    '--color-primary-500': '230 230 230',
-    '--color-primary-600': '240 240 240',
-    '--color-primary-700': '250 250 250',
-    '--color-primary-800': '253 253 253',
-    '--color-primary-900': '254 249 249',
-    '--color-primary-950': '253 252 252',
+	/* Background - Tailwind neutral */
+	"--color-background-0": "250 250 250", // neutral-50 #fafafa
+	"--color-background-50": "245 245 245", // neutral-100 #f5f5f5
+	"--color-background-100": "229 229 229", // neutral-200 #e5e5e5
+	"--color-background-200": "212 212 212", // neutral-300 #d4d4d4
+	"--color-background-300": "163 163 163", // neutral-400 #a3a3a3
+	"--color-background-400": "115 115 115", // neutral-500 #737373
+	"--color-background-500": "82 82 82", // neutral-600 #525252
+	"--color-background-600": "64 64 64", // neutral-700 #404040
+	"--color-background-700": "38 38 38", // neutral-800 #262626
+	"--color-background-800": "23 23 23", // neutral-900 #171717
+	"--color-background-900": "10 10 10", // neutral-950 #0a0a0a
+	"--color-background-950": "10 10 10", // neutral-950 #0a0a0a
 
-    /* Secondary  */
-    '--color-secondary-0': '20 20 20',
-    '--color-secondary-50': '23 23 23',
-    '--color-secondary-100': '31 31 31',
-    '--color-secondary-200': '39 39 39',
-    '--color-secondary-300': '44 44 44',
-    '--color-secondary-400': '56 57 57',
-    '--color-secondary-500': '63 64 64',
-    '--color-secondary-600': '86 86 86',
-    '--color-secondary-700': '110 110 110',
-    '--color-secondary-800': '135 135 135',
-    '--color-secondary-900': '150 150 150',
-    '--color-secondary-950': '164 164 164',
+	/* Background Special */
+	"--color-background-error": "254 241 241", // custom-light-red #FEF1F1
+	"--color-background-warning": "255 243 234", // custom-light-amber #FFF3EA
+	"--color-background-success": "237 252 242", // custom-light-green #EDFCF2
+	"--color-background-muted": "247 248 247", // custom-light-neutral #F7F8F7
+	"--color-background-info": "235 248 254", // custom-light-cyan #EBF8FE
 
-    /* Tertiary */
-    '--color-tertiary-0': '84 49 18',
-    '--color-tertiary-50': '108 61 19',
-    '--color-tertiary-100': '130 73 23',
-    '--color-tertiary-200': '180 98 26',
-    '--color-tertiary-300': '215 117 31',
-    '--color-tertiary-400': '231 129 40',
-    '--color-tertiary-500': '251 157 75',
-    '--color-tertiary-600': '253 180 116',
-    '--color-tertiary-700': '254 209 170',
-    '--color-tertiary-800': '255 233 213',
-    '--color-tertiary-900': '255 242 229',
-    '--color-tertiary-950': '255 250 245',
+	/* Focus Ring Indicator  */
+	"--color-indicator-primary": "132 204 22", // lime-500 #84cc16
+	"--color-indicator-info": "6 182 212", // cyan-500 #06b6d4
+	"--color-indicator-error": "185 28 28", // red-700 #b91c1c
+} as const satisfies ColorMap;
 
-    /* Error */
-    '--color-error-0': '83 19 19',
-    '--color-error-50': '127 29 29',
-    '--color-error-100': '153 27 27',
-    '--color-error-200': '185 28 28',
-    '--color-error-300': '220 38 38',
-    '--color-error-400': '230 53 53',
-    '--color-error-500': '239 68 68',
-    '--color-error-600': '249 97 96',
-    '--color-error-700': '229 91 90',
-    '--color-error-800': '254 202 202',
-    '--color-error-900': '254 226 226',
-    '--color-error-950': '254 233 233',
+type ThemeColorKey = keyof typeof lightThemeMap;
+type ThemeColorMap = Record<ThemeColorKey, ColorValue>;
 
-    /* Success */
-    '--color-success-0': '27 50 36',
-    '--color-success-50': '20 83 45',
-    '--color-success-100': '22 101 52',
-    '--color-success-200': '32 111 62',
-    '--color-success-300': '42 121 72',
-    '--color-success-400': '52 131 82',
-    '--color-success-500': '72 151 102',
-    '--color-success-600': '102 181 132',
-    '--color-success-700': '132 211 162',
-    '--color-success-800': '162 241 192',
-    '--color-success-900': '202 255 232',
-    '--color-success-950': '228 255 244',
+const darkThemeMap = {
+	/* Primary - Tailwind lime (Inverted for dark theme) */
+	"--color-primary-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-primary-50": "26 46 5", // lime-950 #1a2e05
+	"--color-primary-100": "54 83 20", // lime-900 #365314
+	"--color-primary-200": "63 98 18", // lime-800 #3f6212
+	"--color-primary-300": "77 124 15", // lime-700 #4d7c0f
+	"--color-primary-400": "101 163 13", // lime-600 #65a30d
+	"--color-primary-500": "132 204 22", // lime-500 #84cc16
+	"--color-primary-600": "163 230 53", // lime-400 #a3e635
+	"--color-primary-700": "190 242 100", // lime-300 #bef264
+	"--color-primary-800": "217 249 157", // lime-200 #d9f99d
+	"--color-primary-900": "236 252 198", // lime-100 #ecfcc6
+	"--color-primary-950": "247 254 231", // lime-50 #f7fee7
 
-    /* Warning */
-    '--color-warning-0': '84 45 18',
-    '--color-warning-50': '108 56 19',
-    '--color-warning-100': '130 68 23',
-    '--color-warning-200': '180 90 26',
-    '--color-warning-300': '215 108 31',
-    '--color-warning-400': '231 120 40',
-    '--color-warning-500': '251 149 75',
-    '--color-warning-600': '253 173 116',
-    '--color-warning-700': '254 205 170',
-    '--color-warning-800': '255 231 213',
-    '--color-warning-900': '255 244 237',
-    '--color-warning-950': '255 249 245',
+	/* Secondary - Tailwind lime (Inverted for dark theme) */
+	"--color-secondary-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-secondary-50": "26 46 5", // lime-950 #1a2e05
+	"--color-secondary-100": "54 83 20", // lime-900 #365314
+	"--color-secondary-200": "63 98 18", // lime-800 #3f6212
+	"--color-secondary-300": "77 124 15", // lime-700 #4d7c0f
+	"--color-secondary-400": "101 163 13", // lime-600 #65a30d
+	"--color-secondary-500": "132 204 22", // lime-500 #84cc16
+	"--color-secondary-600": "163 230 53", // lime-400 #a3e635
+	"--color-secondary-700": "190 242 100", // lime-300 #bef264
+	"--color-secondary-800": "217 249 157", // lime-200 #d9f99d
+	"--color-secondary-900": "236 252 198", // lime-100 #ecfcc6
+	"--color-secondary-950": "247 254 231", // lime-50 #f7fee7
 
-    /* Info */
-    '--color-info-0': '3 38 56',
-    '--color-info-50': '5 64 93',
-    '--color-info-100': '7 90 131',
-    '--color-info-200': '9 115 168',
-    '--color-info-300': '11 141 205',
-    '--color-info-400': '13 166 242',
-    '--color-info-500': '50 180 244',
-    '--color-info-600': '87 194 246',
-    '--color-info-700': '124 207 248',
-    '--color-info-800': '162 221 250',
-    '--color-info-900': '199 235 252',
-    '--color-info-950': '236 248 254',
+	/* Tertiary - Tailwind lime (Inverted for dark theme) */
+	"--color-tertiary-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-tertiary-50": "26 46 5", // lime-950 #1a2e05
+	"--color-tertiary-100": "54 83 20", // lime-900 #3f6212
+	"--color-tertiary-200": "63 98 18", // lime-800 #3f6212
+	"--color-tertiary-300": "77 124 15", // lime-700 #4d7c0f
+	"--color-tertiary-400": "101 163 13", // lime-600 #65a30d
+	"--color-tertiary-500": "132 204 22", // lime-500 #84cc16
+	"--color-tertiary-600": "163 230 53", // lime-400 #a3e635
+	"--color-tertiary-700": "190 242 100", // lime-300 #bef264
+	"--color-tertiary-800": "217 249 157", // lime-200 #d9f99d
+	"--color-tertiary-900": "236 252 198", // lime-100 #ecfcc6
+	"--color-tertiary-950": "247 254 231", // lime-50 #f7fee7
 
-    /* Typography */
-    '--color-typography-0': '23 23 23',
-    '--color-typography-50': '38 38 39',
-    '--color-typography-100': '64 64 64',
-    '--color-typography-200': '82 82 82',
-    '--color-typography-300': '115 115 115',
-    '--color-typography-400': '140 140 140',
-    '--color-typography-500': '163 163 163',
-    '--color-typography-600': '212 212 212',
-    '--color-typography-700': '219 219 220',
-    '--color-typography-800': '229 229 229',
-    '--color-typography-900': '245 245 245',
-    '--color-typography-950': '254 254 255',
+	/* Error - Tailwind red (Inverted for dark theme) */
+	"--color-error-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-error-50": "69 10 10", // red-950 #450a0a
+	"--color-error-100": "127 29 29", // red-900 #7f1d1d
+	"--color-error-200": "153 27 27", // red-800 #991b1b
+	"--color-error-300": "185 28 28", // red-700 #b91c1c
+	"--color-error-400": "220 38 38", // red-600 #dc2626
+	"--color-error-500": "239 68 68", // red-500 #ef4444
+	"--color-error-600": "248 113 113", // red-400 #f87171
+	"--color-error-700": "252 165 165", // red-300 #fca5a5
+	"--color-error-800": "254 205 205", // red-200 #fecaca
+	"--color-error-900": "254 226 226", // red-100 #fee2e2
+	"--color-error-950": "254 242 242", // red-50 #fef2f2
 
-    /* Outline */
-    '--color-outline-0': '26 23 23',
-    '--color-outline-50': '39 38 36',
-    '--color-outline-100': '65 65 65',
-    '--color-outline-200': '83 82 82',
-    '--color-outline-300': '115 116 116',
-    '--color-outline-400': '140 141 141',
-    '--color-outline-500': '165 163 163',
-    '--color-outline-600': '211 211 211',
-    '--color-outline-700': '221 220 219',
-    '--color-outline-800': '230 230 230',
-    '--color-outline-900': '243 243 243',
-    '--color-outline-950': '253 254 254',
+	/* Success - Tailwind green (Inverted for dark theme) */
+	"--color-success-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-success-50": "12 45 28", // green-950 #0c2d1c
+	"--color-success-100": "20 83 45", // green-900 #14532d
+	"--color-success-200": "22 101 52", // green-800 #166534
+	"--color-success-300": "21 128 61", // green-700 #15803d
+	"--color-success-400": "22 163 74", // green-600 #16a34a
+	"--color-success-500": "34 197 94", // green-500 #22c55e
+	"--color-success-600": "74 222 128", // green-400 #4ade80
+	"--color-success-700": "134 239 172", // green-300 #86efad
+	"--color-success-800": "187 247 208", // green-200 #bbf7d0
+	"--color-success-900": "220 252 231", // green-100 #dcfce7
+	"--color-success-950": "240 253 244", // green-50 #f0fdf4
 
-    /* Background */
-    '--color-background-0': '18 18 18',
-    '--color-background-50': '39 38 37',
-    '--color-background-100': '65 64 64',
-    '--color-background-200': '83 82 82',
-    '--color-background-300': '116 116 116',
-    '--color-background-400': '142 142 142',
-    '--color-background-500': '162 163 163',
-    '--color-background-600': '213 212 212',
-    '--color-background-700': '229 228 228',
-    '--color-background-800': '242 241 241',
-    '--color-background-900': '246 246 246',
-    '--color-background-950': '255 255 255',
+	/* Warning - Tailwind amber (Inverted for dark theme) */
+	"--color-warning-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-warning-50": "77 34 5", // amber-950 #4d2006
+	"--color-warning-100": "120 53 15", // amber-900 #78350f
+	"--color-warning-200": "146 64 14", // amber-800 #92400e
+	"--color-warning-300": "180 83 9", // amber-700 #b45309
+	"--color-warning-400": "217 119 6", // amber-600 #d97706
+	"--color-warning-500": "245 158 11", // amber-500 #f59e0b
+	"--color-warning-600": "251 191 36", // amber-400 #fbbf24
+	"--color-warning-700": "252 211 77", // amber-300 #fcd34d
+	"--color-warning-800": "253 230 138", // amber-200 #fde68a
+	"--color-warning-900": "254 243 199", // amber-100 #fef3c7
+	"--color-warning-950": "255 251 235", // amber-50 #fffbeb
 
-    /* Background Special */
-    '--color-background-error': '66 43 43',
-    '--color-background-warning': '65 47 35',
-    '--color-background-success': '28 43 33',
-    '--color-background-muted': '51 51 51',
-    '--color-background-info': '26 40 46',
+	/* Info - Tailwind cyan (Inverted for dark theme) */
+	"--color-info-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-info-50": "8 47 70", // cyan-950 #082f49
+	"--color-info-100": "24 58 71", // cyan-900 #183a4a
+	"--color-info-200": "25 81 98", // cyan-800 #194a5e
+	"--color-info-300": "21 94 117", // cyan-700 #155e75
+	"--color-info-400": "14 116 144", // cyan-600 #0e7490
+	"--color-info-500": "6 182 212", // cyan-500 #06b6d4
+	"--color-info-600": "34 211 238", // cyan-400 #22d3ee
+	"--color-info-700": "103 232 249", // cyan-300 #67e8f9
+	"--color-info-800": "165 243 252", // cyan-200 #a5f3fc
+	"--color-info-900": "207 250 254", // cyan-100 #cffafe
+	"--color-info-950": "240 253 255", // cyan-50 #f0fdff
 
-    /* Focus Ring Indicator  */
-    '--color-indicator-primary': '247 247 247',
-    '--color-indicator-info': '161 199 245',
-    '--color-indicator-error': '232 70 69',
-  }),
+	/* Typography - Tailwind neutral (Inverted for dark theme) */
+	"--color-typography-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-typography-50": "23 23 23", // neutral-900 #171717
+	"--color-typography-100": "38 38 38", // neutral-800 #262626
+	"--color-typography-200": "64 64 64", // neutral-700 #404040
+	"--color-typography-300": "82 82 82", // neutral-600 #525252
+	"--color-typography-400": "115 115 115", // neutral-500 #737373
+	"--color-typography-500": "163 163 163", // neutral-400 #a3a3a3
+	"--color-typography-600": "212 212 212", // neutral-300 #d4d4d4
+	"--color-typography-700": "229 229 229", // neutral-200 #e5e5e5
+	"--color-typography-800": "245 245 245", // neutral-100 #f5f5f5
+	"--color-typography-900": "250 250 250", // neutral-50 #fafafa
+	"--color-typography-950": "255 255 255", // custom-white #ffffff
+
+	/* Outline - Tailwind neutral (Inverted for dark theme) */
+	"--color-outline-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-outline-50": "23 23 23", // neutral-900 #171717
+	"--color-outline-100": "38 38 38", // neutral-800 #262626
+	"--color-outline-200": "64 64 64", // neutral-700 #404040
+	"--color-outline-300": "82 82 82", // neutral-600 #525252
+	"--color-outline-400": "115 115 115", // neutral-500 #737373
+	"--color-outline-500": "163 163 163", // neutral-400 #a3a3a3
+	"--color-outline-600": "212 212 212", // neutral-300 #d4d4d4
+	"--color-outline-700": "229 229 229", // neutral-200 #e5e5e5
+	"--color-outline-800": "245 245 245", // neutral-100 #f5f5f5
+	"--color-outline-900": "250 250 250", // neutral-50 #fafafa
+	"--color-outline-950": "255 255 255", // custom-white #ffffff
+
+	/* Background - Tailwind neutral (Inverted for dark theme) */
+	"--color-background-0": "10 10 10", // neutral-950 #0a0a0a
+	"--color-background-50": "23 23 23", // neutral-900 #171717
+	"--color-background-100": "38 38 38", // neutral-800 #262626
+	"--color-background-200": "64 64 64", // neutral-700 #404040
+	"--color-background-300": "82 82 82", // neutral-600 #525252
+	"--color-background-400": "115 115 115", // neutral-500 #737373
+	"--color-background-500": "163 163 163", // neutral-400 #a3a3a3
+	"--color-background-600": "212 212 212", // neutral-300 #d4d4d4
+	"--color-background-700": "229 229 229", // neutral-200 #e5e5e5
+	"--color-background-800": "245 245 245", // neutral-100 #f5f5f5
+	"--color-background-900": "250 250 250", // neutral-50 #fafafa
+	"--color-background-950": "255 255 255", // custom-white #ffffff
+
+	/* Background Special (Dark theme) */
+	"--color-background-error": "69 10 10", // custom-dark-red #450A0A
+	"--color-background-warning": "77 34 5", // custom-dark-amber #4D2205
+	"--color-background-success": "12 45 28", // custom-dark-green #0C2D1C
+	"--color-background-muted": "10 10 10", // neutral-950 #0A0A0A
+	"--color-background-info": "8 47 70", // custom-dark-cyan #082F49
+
+	/* Focus Ring Indicator (Dark theme) */
+	"--color-indicator-primary": "190 242 100", // lime-300 #bef264
+	"--color-indicator-info": "103 232 249", // cyan-300 #67e8f9
+	"--color-indicator-error": "248 113 113", // red-400 #f87171
+} as const satisfies ThemeColorMap;
+
+const config = {
+	light: vars(lightThemeMap),
+	dark: vars(darkThemeMap),
 };
+
+export { config, lightThemeMap, darkThemeMap };
+export type { ThemeColorMap, ThemeColorKey, ColorKey, ColorValue };
