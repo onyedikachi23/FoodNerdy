@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { config } from "./config";
-import { View, ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import { OverlayProvider } from "@gluestack-ui/overlay";
 import { useColorScheme } from "nativewind";
 
