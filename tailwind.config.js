@@ -20,6 +20,31 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				"brand-primary-light":
+					"rgb(var(--color-primary-600)/<alpha-value>)",
+				"brand-primary-dark":
+					"rgb(var(--color-primary-300)/<alpha-value>)",
+				"brand-secondary-light":
+					"rgb(var(--color-secondary-600)/<alpha-value>)",
+				"brand-secondary-dark":
+					"rgb(var(--color-secondary-300)/<alpha-value>)",
+				"brand-tertiary-light":
+					"rgb(var(--color-tertiary-600)/<alpha-value>)",
+				"brand-tertiary-dark":
+					"rgb(var(--color-tertiary-300)/<alpha-value>)",
+				"brand-error-light":
+					"rgb(var(--color-error-600)/<alpha-value>)",
+				"brand-error-dark": "rgb(var(--color-error-300)/<alpha-value>)",
+				"brand-warning-light":
+					"rgb(var(--color-warning-600)/<alpha-value>)",
+				"brand-warning-dark":
+					"rgb(var(--color-warning-300)/<alpha-value>)",
+				"brand-success-light":
+					"rgb(var(--color-success-600)/<alpha-value>)",
+				"brand-success-dark":
+					"rgb(var(--color-success-300)/<alpha-value>)",
+				"brand-info-light": "rgb(var(--color-info-600)/<alpha-value>)",
+				"brand-info-dark": "rgb(var(--color-info-300)/<alpha-value>)",
 				primary: {
 					0: "rgb(var(--color-primary-0)/<alpha-value>)",
 					50: "rgb(var(--color-primary-50)/<alpha-value>)",

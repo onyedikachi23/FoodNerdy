@@ -3,8 +3,9 @@
 import React from "react";
 import { View, type ViewProps } from "react-native";
 
-import { tva, type VariantProps } from "@gluestack-ui/nativewind-utils";
+import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { PropSlot, type AsChildProps } from "./slot";
+import type { VariantProps } from "@gluestack-ui/nativewind-utils/types";
 
 const boxStyle = tva({
 	base: "gap-4",
