@@ -1,21 +1,15 @@
 /** @format */
 
-import { createIcon, PrimitiveIcon, Svg } from "@gluestack-ui/icon";
 import { type VariantProps } from "@gluestack-ui/nativewind-utils";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
 import { cssInterop } from "nativewind";
 import React from "react";
-import type { SvgProps } from "react-native-svg";
-
-export const UIIcon = createIcon({
-	Root: PrimitiveIcon,
-}) as React.ForwardRefExoticComponent<
-	React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
-		React.RefAttributes<React.ComponentRef<typeof Svg>>
->;
+import { Svg, type SvgProps } from "react-native-svg";
+import { createIcon } from "./create-icon";
+import { PrimitiveIcon, UIIcon } from "./primitive";
 
 const iconStyle = tva({
-	base: "text-typography-950 fill-none pointer-events-none",
+	base: "text-typography-950 pointer-events-none",
 	variants: {
 		size: {
 			"2xs": "h-3 w-3",
@@ -50,7 +44,12 @@ type IconProps = Prettify<
 	BaseIconProps | (SafeOmit<BaseIconProps, "size"> & { size?: number })
 >;
 
-const Icon: React.FC<IconProps> = ({ size = "md", className, ...props }) => {
+const Icon: React.FC<IconProps> = ({
+	size = "md",
+	fill = "transparent",
+	className,
+	...props
+}) => {
 	if (typeof size === "number") {
 		return (
 			<UIIcon
