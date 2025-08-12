@@ -2,7 +2,6 @@
 
 import { type VariantProps } from "@gluestack-ui/nativewind-utils";
 import { tva } from "@gluestack-ui/nativewind-utils/tva";
-import { cssInterop } from "nativewind";
 import React from "react";
 import { Svg, type SvgProps } from "react-native-svg";
 import { createIcon } from "./create-icon";
@@ -18,19 +17,6 @@ const iconStyle = tva({
 			md: "h-[18px] w-[18px]",
 			lg: "h-5 w-5",
 			xl: "h-6 w-6",
-		},
-	},
-});
-
-cssInterop(UIIcon, {
-	className: {
-		target: "style",
-		nativeStyleToProp: {
-			height: true,
-			width: true,
-			fill: true,
-			color: "classNameColor",
-			stroke: true,
 		},
 	},
 });
@@ -56,6 +42,7 @@ const Icon: React.FC<IconProps> = ({
 				{...props}
 				className={iconStyle({ class: className })}
 				size={size}
+				fill={fill}
 			/>
 		);
 	} else if (
@@ -63,11 +50,19 @@ const Icon: React.FC<IconProps> = ({
 		size === undefined
 	) {
 		return (
-			<UIIcon {...props} className={iconStyle({ class: className })} />
+			<UIIcon
+				{...props}
+				className={iconStyle({ class: className })}
+				fill={fill}
+			/>
 		);
 	}
 	return (
-		<UIIcon {...props} className={iconStyle({ size, class: className })} />
+		<UIIcon
+			{...props}
+			className={iconStyle({ size, class: className })}
+			fill={fill}
+		/>
 	);
 };
 
