@@ -137,3 +137,12 @@ type AssertSubtype<T, U extends T> = U;
  * Useful with `satisfies` keyword to validate key presence with/without strict value type matching.
  */
 type HasKeysOf<T, TValue = unknown> = Record<keyof T, TValue>;
+
+/**
+ * Creates a branded type, a type-safe way to distinguish between
+ * values of the same underlying type.
+ *
+ * @template T The underlying type.
+ * @template B The unique brand literal.
+ */
+type Brand<T, B> = T & { __brand: B };
