@@ -6,17 +6,18 @@ import React, { useEffect } from "react";
 import { View, type ViewProps } from "react-native";
 import { config } from "./config";
 
-export type ModeType = "light" | "dark" | "system";
+export type ThemeMode = "light" | "dark" | "system";
 
 export function GluestackUIProvider({
 	mode = "light",
 	style,
 	children,
 }: {
-	mode?: ModeType;
+	mode?: ThemeMode;
 	children?: React.ReactNode;
 	style?: ViewProps["style"];
 }) {
+	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { colorScheme, setColorScheme } = useAppColorScheme();
 
 	useEffect(() => {
