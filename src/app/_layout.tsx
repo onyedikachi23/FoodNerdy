@@ -16,9 +16,16 @@ import {
 	ThemeProvider,
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
-import "react-native-reanimated";
-import { SafeAreaView } from "react-native-safe-area-context";
 import "../../global.css";
+import {
+	configureReanimatedLogger,
+	ReanimatedLogLevel,
+} from "react-native-reanimated";
+
+configureReanimatedLogger({
+	level: ReanimatedLogLevel.warn,
+	strict: false, // Reanimated runs in strict mode by default
+});
 
 export default function RootLayout() {
 	const colorScheme = useSystemColorScheme();
@@ -39,11 +46,9 @@ export default function RootLayout() {
 			value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
 			<GluestackUIProvider mode={colorScheme ?? "system"}>
 				<Box className="flex-1 bg-background-0">
-					<SafeAreaView className="flex-1">
-						<Stack initialRouteName="index">
-							<Stack.Screen name="+not-found" />
-						</Stack>
-					</SafeAreaView>
+					<Stack initialRouteName="index">
+						<Stack.Screen name="+not-found" />
+					</Stack>
 				</Box>
 			</GluestackUIProvider>
 		</ThemeProvider>
